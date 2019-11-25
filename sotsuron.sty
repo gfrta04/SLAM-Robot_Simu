@@ -1,0 +1,114 @@
+\@twosidefalse \@mparswitchfalse
+\@openrightfalse
+
+\let\@mkboth\@gobbletwo
+\def\@oddfoot{\mbox{}\hfil {\small \thepage}\hfil\mbox{}}
+\def\@evenfoot{\mbox{}\hfil {\small \thepage}\hfil\mbox{}}
+\let\@oddhead\@empty\let\@evenhead\@empty
+
+\renewcommand{\chapter}{%
+\if@openright\cleardoublepage\else\clearpage\fi
+\global\@topnum\z@
+\secdef\@chapter\@schapter}
+
+\topmargin 5pt		%オフセットからヘッダまでのマージン
+\textheight 690pt	%文章領域の高さ
+\textwidth 447pt	%文章領域の幅
+\voffset -0.2in		%垂直方向のオフセット
+\hoffset -1in		%水平方向のオフセット
+\oddsidemargin 75pt %奇数ページのマージン
+\evensidemargin 75pt%偶数ページのマージン
+\headsep 0pt		%ヘッダと本文領域の間の高さ
+
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% 定理環境
+\newtheorem{definition}{定義}[chapter]
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{assumption}{仮定}[chapter]
+\newtheorem{remark}{注意}[chapter]
+\newtheorem{corollary}{系}[chapter]
+\newtheorem{lemma}{補題}[chapter]
+\newtheorem{problem}{問題}[chapter]
+\newtheorem{proof}{証明}
+  % suppress numbering
+  \renewcommand{\theproof}{} 
+  % put a box at the end of proof
+  % LaTeX2e: \usepackage{latexsym} is required
+  \renewcommand{\endproof}{\hfill$\Box$\vspace{3mm}}
+%追加
+\newtheorem{excase}{case}%[section]
+\newcommand{\rtheo}[1]{定理~\ref{#1}}
+\newcommand{\rassu}[1]{仮定~\ref{#1}}
+\newcommand{\rdefi}[1]{定義~\ref{#1}}
+\newcommand{\rproo}[1]{証明~\ref{#1}}
+\newcommand{\rlemm}[1]{補助定理~\ref{#1}}
+\newcommand{\rcase}[1]{case~\ref{#1}}
+
+%
+\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\bibname}{参考文献}
+\newcommand{\req}[1]{(\ref{#1})式}
+\newcommand{\rfig}[1]{図 \ref{#1}}
+\newcommand{\rchap}[1]{第 \ref{#1} 章}
+\newcommand{\rsec}[1]{\ref{#1} 節}
+\newcommand{\rlemma}[1]{補題 \ref{#1}}
+\newcommand{\rtheorem}[1]{定理 \ref{#1}}
+
+\newcommand{\T}{^{\rm T}}
+\newcommand{\QED}{\hfill$\Box$}
+%\renewcommand{\figurename}{Fig.}
+
+%
+% narrower spaces in equation array
+%
+\def\eqnarray{\stepcounter{equation}\let\@currentlabel=\theequation
+\global\@eqnswtrue
+\global\@eqcnt\z@\tabskip\@centering\let\\=\@eqncr
+$$\halign to \displaywidth\bgroup\@eqnsel\hskip\@centering
+  $\displaystyle\tabskip\z@{##}$&\global\@eqcnt\@ne 
+%  \hskip 2\arraycolsep \hfil${##}$\hfil % original
+  \hfil$\displaystyle{{}##{}}$\hfil %SCI01
+%  &\global\@eqcnt\tw@ \hskip 2\arraycolsep % original
+  &\global\@eqcnt\tw@ %SCI01
+   $\displaystyle\tabskip\z@{##}$\hfil 
+   \tabskip\@centering&\llap{##}\tabskip\z@\cr}
+
+
+%\long\def\@makecaption#1#2{%
+%  \vskip\abovecaptionskip
+%  \sbox\@tempboxa{#1: #2}%                            <--- [1]
+%  \ifdim \wd\@tempboxa>\hsize%                        <--- [2]
+%    \sbox\@tempboxa{#1: }%
+%    \@tempdima\hsize \advance\@tempdima-\wd\@tempboxa
+%    #1: \parbox[t]{\@tempdima}{#2}\relax\par%         <--- [3]
+%  \else
+%    \global \@minipagefalse
+%    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%         <--- [4]
+%  \fi
+%  \vskip\belowcaptionskip}
+
+\def\@makechapterhead#1{\hbox{}%
+{\parindent\z@
+\raggedright
+\reset@font\LARGE\bfseries
+\ifnum \c@secnumdepth >\m@ne
+\setlength\@tempdima{\linewidth}%
+\if@mainmatter
+\setbox\z@\hbox{\@chapapp\thechapter\@chappos\hskip1zw}%
+\addtolength\@tempdima{-\wd\z@}%
+\unhbox\z@\nobreak
+\fi
+\vtop{\hsize\@tempdima#1}%
+\fi}\vskip1\Cvs}
+
+\def\@makeschapterhead#1{\hbox{}%
+  {\parindent\z@
+   \raggedright
+   \reset@font\LARGE\bfseries
+   \leavevmode
+   \setlength\@tempdima{\linewidth}%
+   \vtop{\hsize\@tempdima#1}}\vskip1\Cvs}
